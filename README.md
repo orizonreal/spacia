@@ -1,8 +1,7 @@
-# SPACIA static project website
+# SPACIA landing page
 
-This folder contains a Bootstrap mirror of the supplied real estate reference layout, updated for SPACIA by Srijan Realty. The original site source was not present in the supplied folder, so the page structure and styling were recreated from the public reference page.
+Static landing page for SPACIA by Srijan Realty. It uses the supplied project renders, Tower 1 and Tower 2 floor plan PDFs, and the compressed walkthrough video at `assets/video/reel.mp4`.
 
-Open `index.html` in a browser. Styles preserve the Montserrat/Nunito Sans typography, #870123 primary colour, #5A5A5A body text, section order and enquiry modal patterns. Project images and map are in `assets/new/`; the supplied videos are used in the walkthrough section.
+The page preserves the existing maroon colour scheme and Montserrat/Nunito Sans typography. Enquiry forms validate visitor details and open a WhatsApp message to +91 84449 11007; the site has no form backend, analytics, or advertising tracking scripts.
 
-Enquiry forms prepare a WhatsApp message for +91 98300 11551 after the visitor submits the form. They do not post form data to a website server.
-
+Open `index.html` with a static server such as VS Code Live Server.

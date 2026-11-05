@@ -1,9 +1,0 @@
-<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 45" width="64" height="45">
-	<title>court</title>
-	<defs>
-		<image  width="64" height="45" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAtCAMAAAAp3Z1oAAAAAXNSR0IB2cksfwAAAYBQTFRF/f39/v7++vr6/v7+////+/v71tPSs6yqsKmnvbe29PPy7u3soZmX0MzL2NTTta6tv7q44+HgpJya8vHw5ePi/v7+08/OtK6subOxo5uZopqY6ObmuLKwz8vKrKWj29jX5+XkxcC/6+np8vHx+/v77Orp6ujo0s7N9vX1zsnI1tLRqaGf2tfWt7Gwq6SixsHAq6Sj+Pf3+vn54t/e09DP+fj4/Pz8u7Wzpp+dy8fGqKCewby6t7GvpZ2b5OHh5uTkysbF8/Hxrqel3dvazcnIpp6c9fT0zcjHraakurSz4N7d9PPz/v39squq6efm5OLh1dHQ5uTj/f393tvbz8rJubOy7ezr9/b2ycTD7Orq0s/OyMPCvrm3u7a039zbvLa1/fz84uDfuLKx6efn4+DgqqOhzsrJo5ya/Pv7393c9vX0wby73NnZ1dLRsKqoqKGfwLu57Ovq0c3Mr6imvbi2pJ2b4N3dy8bFzMjH6Obl7+7twry7+Pj49PT09/f339/fIODKyQAAAIB0Uk5Tp983v/8///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8YIAiqrB/5AAABnElEQVR4nO3U6TcCURgG8PBSuJZGmeaWKEOWDKKE7EUkFCr7mn3fd/+6GbKMY+bOnL7knJ5P87z3nN/c854zo9HkpJVcTR6klfwskHlAgVZHTGGRNFCMSkqJKSuXBvQUVOjlYzBW0rKAiaFEwb86MhMAS5V4SdZqUTWimswHbHZ7rQTA1tnryQDi4/gTaLAKZ0SgkWWbmj8HzhbMtVakSmlbO+tStIMOptMtVE+Xt7un19fX/344YNEqXWIHY+WEPQxyQzA8Av7AKF/GcFA5EPCYxgFc1ARAaBIg7AeYwtMzKgAwYxdEcBRgln/7nA+gex5UATEUh36KHyUWABbLAJaW1QEJHX97ZP8Yr9gAVgMhFQDVyxj4uuZbB4sBNjAPGTe5ceUAXtsSaqiN3k5W7eyWCGVvjlMM7HtT/eCQQSh4lGrHJ4qAJE2fnn1N2OTx13OMCdM0GZh3OJye79HPj+m80nHxH/4HaQOXV6Jca0W1kAjc3Mrnzi0H3GPzAzGPJmnAeIXI8UakAYCnODFRkANUJwtkBvD8klZe3wCWXcC62KOtswAAAABJRU5ErkJggg=="/>
-	</defs>
-	<style>
-	</style>
-	<use id="Background" href="#img1" x="0" y="0"/>
-</svg>

@@ -1,6 +1,6 @@
 (function () {
   const waNumber = '918444911007';
-  const projectPrefix = 'Hi, I am interested in SPACIA by Srijan Realty.';
+  const projectPrefix = "Hi, I'm interested in SPACIA by Srijan Realty.";
   const whatsappUrl = (message) => `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
 
   document.querySelectorAll('[data-wa-message]').forEach((link) => {
@@ -10,11 +10,20 @@
   });
 
   document.querySelectorAll('form').forEach((form) => {
+    const nameInput = form.elements.namedItem('Name');
+    const phoneInput = form.elements.namedItem('MobileNumber');
+    const emailInput = form.elements.namedItem('Email');
+    const unitInput = form.elements.namedItem('UnitType');
+
+    if (nameInput && phoneInput && emailInput) {
+      [nameInput, phoneInput, emailInput].forEach((input) => {
+        input.addEventListener('input', () => input.setCustomValidity(''));
+      });
+      unitInput?.addEventListener('change', () => unitInput.setCustomValidity(''));
+    }
+
     form.addEventListener('submit', (event) => {
       event.preventDefault();
-      const nameInput = form.elements.namedItem('Name');
-      const phoneInput = form.elements.namedItem('MobileNumber');
-      const emailInput = form.elements.namedItem('Email');
       if (!nameInput || !phoneInput || !emailInput) return;
 
       nameInput.value = nameInput.value.trim();
@@ -23,10 +32,12 @@
       const phoneDigits = phoneInput.value.replace(/\D/g, '');
       nameInput.setCustomValidity(nameInput.value ? '' : 'Please enter your name.');
       phoneInput.setCustomValidity(phoneDigits.length >= 10 && phoneDigits.length <= 15 ? '' : 'Please enter a valid phone number.');
-      emailInput.setCustomValidity(emailInput.value ? '' : 'Please enter your email address.');
+      emailInput.setCustomValidity(emailInput.validity.valid && emailInput.value ? '' : 'Please enter a valid email address.');
+      if (unitInput) unitInput.setCustomValidity(unitInput.value ? '' : 'Please select a unit type.');
       if (!form.reportValidity()) return;
 
-      const message = `Hi, I am ${nameInput.value} (${phoneInput.value}, ${emailInput.value}). I am interested in SPACIA, please call me.`;
+      const unitDetails = unitInput ? ` I'm interested in ${unitInput.value}.` : '';
+      const message = `Hi, I'm ${nameInput.value} (${phoneInput.value}, ${emailInput.value}). I'm interested in SPACIA by Srijan Realty.${unitDetails} Please call me.`;
       window.open(whatsappUrl(message), '_blank', 'noopener,noreferrer');
     });
   });
@@ -38,16 +49,66 @@
       const gap = parseFloat(getComputedStyle(masonry).rowGap) || 18;
       masonry.querySelectorAll('.gallery-masonry-item').forEach((item) => {
         const image = item.querySelector('img');
+        const caption = item.querySelector('span');
         if (!image || !image.naturalWidth) return;
         const imageHeight = item.clientWidth * image.naturalHeight / image.naturalWidth;
-        item.style.gridRowEnd = `span ${Math.ceil((imageHeight + gap) / (rowHeight + gap))}`;
+        const captionHeight = caption ? caption.getBoundingClientRect().height : 0;
+        item.style.gridRowEnd = `span ${Math.ceil((imageHeight + captionHeight + gap) / (rowHeight + gap))}`;
       });
     };
-    masonry.querySelectorAll('img').forEach((image) => image.addEventListener('load', layoutMasonry));
+    masonry.querySelectorAll('img').forEach((image) => {
+      image.addEventListener('load', layoutMasonry);
+      if (image.complete) layoutMasonry();
+    });
     window.addEventListener('resize', layoutMasonry, { passive: true });
     if ('ResizeObserver' in window) new ResizeObserver(layoutMasonry).observe(masonry);
     layoutMasonry();
+
+    const lightbox = document.getElementById('spacia-lightbox');
+    const lightboxImage = lightbox?.querySelector('img');
+    const lightboxCaption = lightbox?.querySelector('figcaption');
+    const closeLightbox = () => {
+      if (!lightbox) return;
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('lightbox-open');
+      if (lightboxImage) lightboxImage.src = '';
+    };
+    masonry.querySelectorAll('.gallery-masonry-item').forEach((item) => {
+      item.addEventListener('click', () => {
+        const image = item.querySelector('img');
+        if (!lightbox || !image || !lightboxImage) return;
+        lightboxImage.src = image.currentSrc || image.src;
+        lightboxImage.alt = image.alt;
+        if (lightboxCaption) lightboxCaption.textContent = item.dataset.lightboxCaption || image.alt;
+        lightbox.classList.add('is-open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('lightbox-open');
+        lightbox.querySelector('.spacia-lightbox-close')?.focus();
+      });
+    });
+    lightbox?.querySelector('.spacia-lightbox-close')?.addEventListener('click', closeLightbox);
+    lightbox?.addEventListener('click', (event) => { if (event.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeLightbox(); });
   }
+
+  const activateTabs = (selector, panelAttribute) => {
+    document.querySelectorAll(selector).forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const group = tab.closest('[role="tablist"]');
+        const panelId = tab.dataset[panelAttribute];
+        if (!group || !panelId) return;
+        const scope = group.parentElement;
+        group.querySelectorAll(selector).forEach((sibling) => {
+          sibling.classList.toggle('is-active', sibling === tab);
+          sibling.setAttribute('aria-selected', String(sibling === tab));
+        });
+        scope.querySelectorAll('[role="tabpanel"]').forEach((panel) => { panel.hidden = panel.id !== panelId; });
+      });
+    });
+  };
+  activateTabs('[data-floor-tab]', 'floorTab');
+  activateTabs('[data-location-tab]', 'locationTab');
 
   document.querySelectorAll('.slidecontent-list, .overview-slider, .footer-slick').forEach((slider) => {
     if (!window.jQuery || !jQuery.fn.slick || jQuery(slider).hasClass('slick-initialized')) return;
@@ -97,11 +158,8 @@
     if ('IntersectionObserver' in window) {
       const reelObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.55) {
-            video.play().catch(() => {});
-          } else {
-            video.pause();
-          }
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.55) video.play().catch(() => {});
+          else video.pause();
         });
       }, { threshold: [0, 0.55, 1] });
       reelObserver.observe(frame);
@@ -109,8 +167,7 @@
     document.addEventListener('visibilitychange', () => { if (document.hidden) video.pause(); });
   }
 
-  const backToTop = document.getElementById('back-to-top');
-  backToTop?.addEventListener('click', (event) => {
+  document.getElementById('back-to-top')?.addEventListener('click', (event) => {
     event.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });

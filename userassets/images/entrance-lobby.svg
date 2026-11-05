@@ -1,9 +1,0 @@
-<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 45" width="64" height="45">
-	<title>entrance-lobby</title>
-	<defs>
-		<image  width="64" height="45" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAtCAMAAAAp3Z1oAAAAAXNSR0IB2cksfwAAAU1QTFRF/Pz8/f399/f3/v7+////+/v7+/r66efn6Obl8O/u7evrqaGfr6insauppZ2braakp6CexcC+vbi208/Ota+u5ePi+vn5qqKhtK6s5+Xkt7Gw4+Hg/Pz8/v7+/f39ycXEq6Si8fDwvbe1s6yr+Pj4saqo0MzLu7WzxcC/5uTksKmn9/b21dHQxsHA0s/O8O7usaqpopqYzcjHsKqo9fT0/Pv7q6SjqKCe4N7doZmXtK2sz8vKrqim0s7NrKWj9vX0v7q5uLKx+/v7w769ta6t/fz8z8rJzMfG+vr6zMjH8/Ly/v39v7m4w768y8fGuLKwwr28t7Gvwbu6y8bFv7q48/HxpJyapp6cpJ2bpZ6co5ya0c3M9vX19/f2yMPCzsrJp5+d7+7t29jXs62rurSzrqelysXEycTD4N3dta+t9PPy8e/v/Pz8/f399/f3a83yewAAAG90Uk5TY4Mhv/8/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////XXwffTahJwAAAYdJREFUeJzt0+tbwVAcB3DVSSgllUaMqBhTlC5alCFmdFGhm+73y///ss050zPNGY/q1b4vdp6z5/l+tvPbM52ur6f06wZATxnUAA34E0A/ZMDGqAKYhkfMsoyOyfeWcTxgnWh5wuSUfG+bNmEBwq4CAMfMPwHOFsBFdge4PbMygPT65roB3PMLSIAA6fUHkIAB9AbKHrTDfgjQUGgAQt8JwlBwLFLUkjJgjhBEVASWV0LClfbEJMDqF0cS9q2KwBpBrG8oAfq4C4BNEWC2xGoiuS0BOylWGGM6k0VH2M0pAfl4cwacICSSheYR+GKKdZUyNmkGzF57gAJQyME+GiJf3D+AfXCIB8pHcMOhvvQZ+WPUL1iMWOAkWKk2gpZqtAbXU7SenQMsAMBFDBsWqAGdRBkgo5edAnVGCQAl4orpKPXrG0WAv+W4u8z9A9c+6dpj/Iljvvs/fqbnlzKNeXfSQkfkd1oBtlp5xZ0+0PiMGAAU3nB9kDdlVYBuowEa8EvA+0dP+fwCklaVVb2RKE0AAAAASUVORK5CYII="/>
-	</defs>
-	<style>
-	</style>
-	<use id="Background" href="#img1" x="0" y="0"/>
-</svg>
