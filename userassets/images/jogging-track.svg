@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 45" width="64" height="45">
+	<title>jogging-track</title>
+	<defs>
+		<image  width="64" height="45" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAtCAMAAAAp3Z1oAAAAAXNSR0IB2cksfwAAAdFQTFRF+vr6/f39/Pz8/Pz8/////f39/Pv74+Hgz8rJwby6u7WzubOxurSyv7m4y8bF3tvb+Pf39PPzyMTCpp+dtK2sysXE2dXV4N3d4t/f4d/e29jXzsnIpZ2b7Orp/v7+0s/OyMPC8fDw0s7NqKCexL+++vn5+/v7vLa1s6yr8O7u2dbVv7q4vbi2vri3xcC/1NHQ7ezrwLu5r6im8/Hx/Pz8uLKwv7q5/fz8vrm308/O3NnY1dHQxL69qaGf5ePiq6Si8/Lyw769/v391tPSp5+d0MzL+fn5qqOhxsHA/f39saqprKWjraak7+7t4uDf4N3ct7GwysbFpp6c8vHx3tvatK6sqaKg5uTk9vX1p6Ce6+npycTD09DP7+3t9fT0sKqo+fj4pJ2b9/b2t7GvwLq55OLhtrCu6efnx8LAzMfG4N7durSz5OLiz8vKsaqo1NDPy8fG9/f2pJya2tfWpZ6c+Pj4q6Sj7Orqvbe22NXUvbe17uzss6yq+vr67evrrqelqqKhzMjH9PPyzcjH2tfXycXE8vHwwby719TTwbu65+Xl3NnZw768wry7wr282NTT1dLRxcC+7u3sx8LBr6in3dva3drZta+t+vr6/f39/Pz8sI82hQAAAJt0Uk5TM4NRYv+c//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8wfEzPC+oHAAACHklEQVR4nO3V6VcSURgGcKonIlEC0QQhokFBCWwztkKUwHHALVsEUwpMTBGXyhIrW8x20rL9r2360rkwcy+cwzePz8d7zvObuefOvFehOFBTDioOoaYc3gf2MKA8ojpapyZS36A5pq0a0DXqm5qPtxiIGFtNanPDiaoAy0m99ZTcw7Scra29MmB3dHSKL+G0nnYRcXedOSsS585fqAR0X/R40eky+/wBMq2XLgebegAu1FsB6HOEcSUS7ZfuIBzgBwREY0om0BLvR3RwSFr/F61a1B0aFhAeHMYIr5PvA97Rq9CNXWMA12+g/eY4rQ8kkhO41cgAHE743fQ+MOnClM1CBQRzCrd7WMCdtBbxCSowxSOTFlgApo2466QCM1nMxph93JvEnIoKzOewkGUDc3nkyYMsBcT27CIbGFjCcp4KDPFYue9lAlkDPA+ogPBQh9gMq69Nr+LRYyqAtQKW1lkA58OTIP07wMhTPOMX6P1UcgPWZnKlDLA8n4fhRfk//z/27Ev0jr1iABgOrcIf2pDvZ6Y9FuQ2S9Yk86ArJ+C1fjMjrXcXglsWmDpKT0kCCPVrdrx5a65TvXMSKXDvI6MfAFU8BTYApS8m7mDlo+ZTkchn67Y4aBPuxfJZITfWdyJfvkp3IB6BKrlrL1+UvRcSy7ZvuzuB70R+bGt+posyLuVmEsa5NreDyHrRZJTcCQyg+uwDewT49bum/PkLWBS3t3uvVr0AAAAASUVORK5CYII="/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="0" y="0"/>
+</svg>
