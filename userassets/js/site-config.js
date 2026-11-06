@@ -1,6 +1,6 @@
 window.SPACIA_CONFIG = Object.freeze({
   siteUrl: 'https://spacia-one.vercel.app/',
-  socialImage: 'assets/images/spacia-social-1200x630.jpg',
+  socialImage: 'assets/images/spacia-social-1200x630.webp',
   startingPrice: '₹78.96 Lacs* onwards',
   phoneDigits: '918444911007',
   phoneDisplay: '+91 84449 11007',

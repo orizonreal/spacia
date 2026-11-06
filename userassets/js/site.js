@@ -10,7 +10,7 @@
   });
   if (config.siteUrl) {
     const siteUrl = new URL(config.siteUrl).href;
-    const socialImage = new URL(config.socialImage || 'assets/images/spacia-social-1200x630.jpg', siteUrl).href;
+    const socialImage = new URL(config.socialImage || 'assets/images/spacia-social-1200x630.webp', siteUrl).href;
     document.querySelector('link[rel="canonical"]')?.setAttribute('href', siteUrl);
     document.querySelector('meta[property="og:url"]')?.setAttribute('content', siteUrl);
     document.querySelector('meta[property="og:image"]')?.setAttribute('content', socialImage);
