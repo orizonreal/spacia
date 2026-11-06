@@ -6666,6 +6666,8 @@ body { padding-bottom:58px; }
   .spacia-tab { padding:8px 11px; font-size:.9rem; }
   .spacia-location-map,.spacia-location-map iframe { min-height:280px; }
   .spacia-spec-list { grid-template-columns:1fr; }
+  .spacia-spec-list div { min-width:0; }
+  .spacia-spec-list dt,.spacia-spec-list dd { min-width:0; overflow-wrap:anywhere; }
   .responsive-call-enquiry .spacia-sticky-action { min-height:52px; font-size:11px; }
   body { padding-bottom:56px; }
 }
@@ -6721,4 +6723,74 @@ section.spacia-faq { padding:64px 0; background:#F9F2F1; }
 @media (max-width:767.98px) {
   body { padding-bottom:calc(56px + env(safe-area-inset-bottom)); }
   .responsive-call-enquiry .spacia-sticky-action { min-height:54px; }
+}
+
+/* Phone widths: prevent sideways page movement and keep fixed actions inside the viewport. */
+html, body { max-width:100%; overflow-x:hidden; }
+*, *::before, *::after { box-sizing:border-box; }
+img, video, iframe { max-width:100%; }
+.spacia-intro { padding:24px 0 8px; background:#fff; }
+.spacia-possession-stat h2 { text-transform:none !important; }
+.spacia-intro p { max-width:1000px; margin:0 auto; color:#5A5A5A; font-size:1.05rem; line-height:1.7; }
+.spacia-quick-facts { padding:32px 0 52px; background:#F9F2F1; }
+.spacia-quick-facts h2 { margin:0 0 22px; color:#870123; text-align:center; }
+.spacia-quick-facts-scroll { max-width:1000px; margin:0 auto; overflow-x:auto; }
+.spacia-quick-facts table { width:100%; max-width:100%; table-layout:fixed; border-collapse:collapse; background:#fff; color:#5A5A5A; }
+.spacia-quick-facts th,.spacia-quick-facts td { padding:12px 14px; border-bottom:1px solid rgba(135,1,35,.18); text-align:left; vertical-align:top; overflow-wrap:anywhere; }
+.spacia-quick-facts th { width:31%; color:#870123; font-weight:700; }
+.spacia-quick-facts tr:last-child th,.spacia-quick-facts tr:last-child td { border-bottom:0; }
+.spacia-possession-note { max-width:1100px; margin:0 auto; padding:0 15px 12px; color:#fff; text-align:center; font-size:.82rem; }
+.spacia-price-note { display:block; margin-top:5px; color:#5A5A5A; font-size:.78rem; line-height:1.35; }
+.responsive-call-enquiry .spacia-sticky-action { flex:1 1 33.333%; min-width:0; background:#870123; color:#fff; }
+.responsive-call-enquiry .spacia-sticky-action:last-child { background:#870123; color:#fff; }
+.responsive-call-enquiry .spacia-sticky-action.spacia-sticky-whatsapp { background:#25D366; color:#fff; }
+a.whatsapp { z-index:100300; width:56px; height:56px; display:grid; place-items:center; right:16px; bottom:84px; border-radius:50%; background:#25D366; box-shadow:0 3px 12px rgba(0,0,0,.28); }
+a.whatsapp .fa-whatsapp { color:#fff; font-size:34px; line-height:1; }
+
+@media (max-width:767.98px) {
+  header.header1 { min-height:64px; }
+  a.navbar-brand img { width:auto !important; height:44px !important; max-width:100%; }
+  #fixedbutton_visit { display:none !important; }
+
+  .responsive-call-enquiry {
+    left:0; right:0; bottom:0; width:100%; max-width:100%;
+    padding:0 0 env(safe-area-inset-bottom); background:#870123;
+  }
+  .responsive-call-enquiry > .row { display:flex !important; width:100%; margin:0; }
+  .responsive-call-enquiry .spacia-sticky-action {
+    display:flex; flex:1 1 0; width:33.3333%; min-width:0; min-height:56px;
+    align-items:center; justify-content:center; padding:8px 4px;
+    border:0; border-right:1px solid rgba(255,255,255,.35); border-radius:0;
+    background:#870123; color:#fff; font-size:clamp(10px,2.8vw,12px);
+    font-weight:700; line-height:1.15; text-align:center; text-decoration:none;
+    overflow-wrap:anywhere;
+  }
+  .responsive-call-enquiry .spacia-sticky-action:last-child { background:#870123; color:#fff; }
+  .responsive-call-enquiry .spacia-sticky-action.spacia-sticky-whatsapp { background:#25D366; color:#fff; }
+  .responsive-call-enquiry .spacia-sticky-action:hover,
+  .responsive-call-enquiry .spacia-sticky-action:last-child:hover { color:#fff; }
+
+  body { padding-bottom:calc(56px + env(safe-area-inset-bottom)); }
+  a.whatsapp {
+    position:fixed; right:16px; bottom:calc(72px + env(safe-area-inset-bottom) + 12px) !important;
+    z-index:100300; display:grid; place-items:center; width:56px; height:56px;
+    border:2px solid #fff; border-radius:50%; background:#25D366;
+    box-shadow:0 3px 12px rgba(0,0,0,.28); text-decoration:none;
+  }
+  a.whatsapp .fa-whatsapp { color:#fff; font-size:34px; line-height:1; }
+  #back-to-top {
+    position:fixed; left:16px; right:auto; bottom:calc(72px + env(safe-area-inset-bottom) + 12px) !important;
+    z-index:100200; width:48px; height:48px; display:grid; place-items:center;
+    border-radius:50%;
+  }
+  #back-to-top i { position:static; margin:0; line-height:1; }
+  .spacia-config-scroll { max-width:100%; }
+  .spacia-config-table { width:100%; max-width:100%; min-width:0; }
+  .spacia-intro { padding-top:18px; }
+  .spacia-intro p { font-size:.98rem; line-height:1.55; }
+  .spacia-quick-facts { padding:24px 0 36px; }
+  .spacia-quick-facts th,.spacia-quick-facts td { padding:10px 8px; font-size:.9rem; }
+  .spacia-quick-facts th { width:35%; }
+  .details .details-content li h2 { font-size:clamp(.78rem,3vw,.98rem); line-height:1.2; overflow-wrap:anywhere; }
+  .spacia-possession-note { padding-bottom:10px; font-size:.75rem; }
 }
