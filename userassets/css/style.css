@@ -6681,3 +6681,44 @@ section.details .details-content li { width:20%; }
 @media (max-width:767.98px) { section.details .details-content li { width:50%; } }
 
 .spacia-config-table { min-width:1100px; }
+
+/* Search-friendly FAQ content and small-screen table layout. */
+.skip-link { position:fixed; top:10px; left:10px; z-index:100200; padding:10px 14px; transform:translateY(-150%); border-radius:3px; background:#fff; color:#870123; font-weight:700; box-shadow:0 2px 12px rgba(0,0,0,.18); }
+.skip-link:focus { transform:translateY(0); color:#870123; }
+section.spacia-faq { padding:64px 0; background:#F9F2F1; }
+.spacia-faq h2 { margin:0; color:#870123; text-align:center; }
+.spacia-faq-intro { margin:10px auto 26px; color:#5A5A5A; text-align:center; }
+.spacia-faq-list { max-width:920px; margin:0 auto; }
+.spacia-faq-list details { margin:0 0 12px; padding:0 18px; border:1px solid rgba(135,1,35,.22); border-radius:5px; background:#fff; color:#5A5A5A; }
+.spacia-faq-list summary { position:relative; padding:17px 28px 17px 0; color:#870123; font-weight:700; line-height:1.45; cursor:pointer; }
+.spacia-faq-list summary::marker { color:#870123; }
+.spacia-faq-list details p { margin:0; padding:0 0 18px; line-height:1.65; }
+.spacia-faq-list details:focus-within { outline:3px solid #c47b90; outline-offset:2px; }
+.configuration-details .spacia-config-table caption { color:#5A5A5A; }
+
+@media (max-width:767.98px) {
+  html { scroll-padding-top:16px; }
+  .spacia-config-scroll { overflow:visible; }
+  .spacia-config-table { width:100%; min-width:0; border-collapse:separate; border-spacing:0; background:transparent; }
+  .spacia-config-table thead { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  .spacia-config-table tbody { display:block; }
+  .spacia-config-table tbody tr { display:grid; grid-template-columns:minmax(0,1fr); margin:0 0 16px; padding:8px 14px; border:1px solid rgba(135,1,35,.25); border-radius:5px; background:#fff; box-shadow:0 3px 10px rgba(43,14,23,.06); }
+  .spacia-config-table tbody tr:nth-child(even) { background:#fff; }
+  .spacia-config-table tbody td { display:grid; grid-template-columns:minmax(115px,.85fr) minmax(0,1.15fr); gap:10px; align-items:start; width:100%; padding:11px 2px; border-bottom:1px solid rgba(135,1,35,.13); text-align:left; overflow-wrap:anywhere; }
+  .spacia-config-table tbody td::before { content:attr(data-label); color:#870123; font-weight:700; }
+  .spacia-config-table tbody td:last-child { border-bottom:0; }
+  .spacia-config-table tbody td[data-label="More details"] .button { width:max-content; max-width:100%; white-space:normal; }
+  .spacia-faq-list details { padding-right:14px; padding-left:14px; }
+  .spacia-faq-list summary { padding-top:15px; padding-bottom:15px; }
+}
+
+@supports (padding:max(0px)) {
+  body { padding-bottom:calc(58px + env(safe-area-inset-bottom)); }
+  .responsive-call-enquiry { padding-bottom:env(safe-area-inset-bottom); }
+  #back-to-top,.whatsapp { bottom:calc(72px + env(safe-area-inset-bottom)) !important; }
+}
+
+@media (max-width:767.98px) {
+  body { padding-bottom:calc(56px + env(safe-area-inset-bottom)); }
+  .responsive-call-enquiry .spacia-sticky-action { min-height:54px; }
+}
