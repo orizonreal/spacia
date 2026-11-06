@@ -3,10 +3,16 @@
   const waNumber = config.phoneDigits || '918444911007';
   const projectPrefix = "Hi, I'm interested in SPACIA by Srijan Realty.";
   const whatsappUrl = (message) => `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+  const prices = config.prices || {};
+  const startingPrice = prices[config.startingConfiguration];
 
   // Keep pricing and domain-specific SEO references in one editable config file.
   document.querySelectorAll('[data-spacia-starting-price]').forEach((node) => {
-    if (config.startingPrice) node.textContent = config.startingPrice;
+    if (startingPrice) node.textContent = `${startingPrice}* onwards`;
+  });
+  document.querySelectorAll('[data-spacia-config-price]').forEach((node) => {
+    const configurationPrice = prices[node.dataset.spaciaConfigPrice];
+    if (configurationPrice) node.textContent = configurationPrice;
   });
   if (config.siteUrl) {
     const siteUrl = new URL(config.siteUrl).href;

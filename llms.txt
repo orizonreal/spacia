@@ -1,8 +1,12 @@
 # SPACIA by Srijan Realty
 
-SPACIA is a residential and retail development at Jessore Road South, Mouza Doharia, Ward 09, beside Reliance Mall, Madhyamgram, Kolkata 700129. It has 449 apartments across six G+12 towers on 3.6 acres, with 64% open space and 3 BHK and 4 BHK homes. The project is IGBC Platinum Pre-Certified and registered as WBRERA/P/NOR/2025/003059. Possession is planned for 2030; confirm the RERA completion date with Srijan Realty.
+SPACIA is a residential and retail development at Jessore Road South, Mouza Doharia, Ward 09, beside Reliance Mall, Madhyamgram, Kolkata 700129. It has 449 apartments across six G+12 towers on 3.6 acres, with 64% open space including podium, 3-side-open homes, an 18,000 sq.ft. clubhouse, and 29,000+ sq.ft. of retail. The currently published configurations are 3 BHK + 2T, 3 BHK + 3T and 4 BHK + 3T. Current official starting prices are ₹81.30 Lacs, ₹1.03 Cr and ₹1.19 Cr, respectively; confirm live prices and availability with Srijan Realty.
+
+Srijan Realty advertises 2030 as the possession target. WBRERA records 31 December 2032 as the registered completion date. The WBRERA project detail page currently displays a quarterly status update default notice and “Not Started” status, while the district listing says “Under Construction”; confirm the current status and filings with Srijan Realty. Registration number: WBRERA/P/NOR/2025/003059.
 
 - Project website: https://spacia-one.vercel.app/
 - Official Srijan Realty project page: https://www.srijanrealty.com/property/spacia/
-- West Bengal RERA: https://rera.wb.gov.in/
+- Official brochure: https://spacia-one.vercel.app/assets/documents/SPACIA-Official-Brochure.pdf
+- WBRERA project record: https://rera.wb.gov.in/project_details.php?procode=15914000000012
+- Configuration and floor-plan section: https://spacia-one.vercel.app/#configuration
 - Project enquiries: +91 84449 11007

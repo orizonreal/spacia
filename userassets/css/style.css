@@ -6748,6 +6748,8 @@ a.whatsapp { z-index:100300; width:56px; height:56px; display:grid; place-items:
 a.whatsapp .fa-whatsapp { color:#fff; font-size:34px; line-height:1; }
 
 @media (max-width:767.98px) {
+  /* Let the document own the vertical scrollbar so page sections use the full mobile viewport width. */
+  body { overflow-y:visible !important; }
   header.header1 { min-height:64px; }
   a.navbar-brand img { width:auto !important; height:44px !important; max-width:100%; }
   #fixedbutton_visit { display:none !important; }
@@ -6793,4 +6795,60 @@ a.whatsapp .fa-whatsapp { color:#fff; font-size:34px; line-height:1; }
   .spacia-quick-facts th { width:35%; }
   .details .details-content li h2 { font-size:clamp(.78rem,3vw,.98rem); line-height:1.2; overflow-wrap:anywhere; }
   .spacia-possession-note { padding-bottom:10px; font-size:.75rem; }
+}
+
+/* Responsive floating contact actions: compact left panel on tablets/desktops, two-button dock on phones. */
+body { padding-bottom:0; }
+#fixedbutton_visit { display:none !important; }
+.responsive-call-enquiry {
+  position:fixed; z-index:100200; top:64vh; bottom:auto; left:12px; right:auto;
+  display:flex !important; flex-direction:column; width:164px; max-width:calc(100vw - 24px);
+  padding:8px; border:1px solid rgba(135,1,35,.16); border-radius:7px;
+  background:rgba(255,255,255,.97); box-shadow:0 5px 20px rgba(37,10,20,.2);
+  transform:translateY(-50%); text-align:center;
+}
+.responsive-call-enquiry > .row {
+  display:flex !important; flex-direction:column; gap:7px; width:100%; margin:0;
+}
+.responsive-call-enquiry .spacia-sticky-action {
+  display:flex; flex:1 1 auto; width:100%; min-width:0; min-height:48px;
+  align-items:center; justify-content:center; padding:9px 8px; border:0; border-radius:4px;
+  background:#870123; color:#fff; font-size:12px; font-weight:700; line-height:1.2;
+  text-align:center; text-decoration:none; overflow-wrap:anywhere;
+}
+.responsive-call-enquiry .spacia-sticky-action:hover,
+.responsive-call-enquiry .spacia-sticky-action:focus-visible { background:#6f001d; color:#fff; }
+a.whatsapp {
+  position:fixed; z-index:100300; right:20px; bottom:24px; width:56px; height:56px;
+  display:grid; place-items:center; border:2px solid #fff; border-radius:50%;
+  background:#25D366; box-shadow:0 3px 12px rgba(0,0,0,.28); text-decoration:none;
+}
+a.whatsapp .fa-whatsapp { color:#fff; font-size:34px; line-height:1; }
+#back-to-top {
+  position:fixed; z-index:100200; left:20px; right:auto; bottom:24px !important;
+}
+
+@media (max-width:767.98px) {
+  body { padding-bottom:calc(56px + env(safe-area-inset-bottom)); }
+  .responsive-call-enquiry {
+    top:auto; bottom:0; left:0; right:0; width:100%; max-width:100%;
+    flex-direction:row; padding:0 8px env(safe-area-inset-bottom); border:0; border-radius:0;
+    background:#870123; box-shadow:0 -3px 14px rgba(37,10,20,.18); transform:none;
+  }
+  .responsive-call-enquiry > .row { flex-direction:row; gap:8px; width:100%; margin:0; }
+  .responsive-call-enquiry .spacia-sticky-action {
+    flex:1 1 0; width:50%; min-height:56px; padding:9px 6px;
+    border:1px solid rgba(255,255,255,.44); border-radius:3px;
+    font-size:clamp(11px,3vw,13px); line-height:1.15;
+  }
+  a.whatsapp {
+    right:16px; bottom:calc(56px + env(safe-area-inset-bottom) + 12px);
+  }
+  #back-to-top {
+    left:16px; right:auto; bottom:calc(56px + env(safe-area-inset-bottom) + 12px) !important;
+  }
+}
+
+@media (max-height:520px) and (min-width:768px) {
+  .responsive-call-enquiry { top:58vh; }
 }
