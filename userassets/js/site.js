@@ -352,7 +352,7 @@
     modalEl.querySelector('.sp-modal__title').textContent = title;
     const intro = modalEl.querySelector('.sp-modal__intro');
     if (intro) intro.textContent = trigger.dataset.enquireIntro || (item === 'Project details'
-      ? 'Share your details and the Srijan Spacia team will get in touch.'
+      ? 'Share your details and the Spacia team will get in touch.'
       : `Share your details and our team will send you the ${item}.`);
     modalForm.elements.namedItem('requested_item').value = item;
     modalForm.dataset.thanks = trigger.dataset.enquireThanks || '';
