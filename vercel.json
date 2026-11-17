@@ -1,4 +1,16 @@
 {
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "spacia-one.vercel.app" }],
+      "destination": "https://www.spacia-madhyamgram.in/:path*",
+      "permanent": true
+    },
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/assets/documents/:file*", "destination": "/", "permanent": false },
+    { "source": "/assets/new/:file(.*\\.pdf)", "destination": "/", "permanent": false },
+    { "source": "/assets/new/SPACIA-Master-Plan-27-June25.png", "destination": "/", "permanent": false }
+  ],
   "headers": [
     {
       "source": "/assets/documents/SPACIA-Official-Brochure.pdf",
@@ -8,6 +20,10 @@
           "value": "attachment; filename=\"SPACIA-Official-Brochure.pdf\""
         }
       ]
+    },
+    {
+      "source": "/site.webmanifest",
+      "headers": [{ "key": "Content-Type", "value": "application/manifest+json" }]
     }
   ]
 }

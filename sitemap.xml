@@ -1,7 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://spacia-one.vercel.app/</loc>
-    <lastmod>2026-11-06</lastmod>
+    <loc>https://www.spacia-madhyamgram.in/</loc>
+    <lastmod>2026-11-17</lastmod>
+    <image:image>
+      <image:loc>https://www.spacia-madhyamgram.in/assets/hero/aerial-dusk-1200.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.spacia-madhyamgram.in/assets/images/spacia-social-1200x630.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.spacia-madhyamgram.in/assets/optimized/swimming-pool-twilight-hires-900.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.spacia-madhyamgram.in/assets/optimized/party-lawn-area-twilight-hires-900.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.spacia-madhyamgram.in/assets/optimized/semi-aerial-total-landscape_day-900.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.spacia-madhyamgram.in/assets/optimized/elevation-day-hires-900.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.spacia-madhyamgram.in/assets/optimized/living-room-hires-final-900.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.spacia-madhyamgram.in/assets/optimized/community-hall-hires-final-900.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.spacia-madhyamgram.in/assets/optimized/aerial-view-dusk-hires-900.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.spacia-madhyamgram.in/assets/optimized/spacia-location-map-1600.webp</image:loc>
+    </image:image>
   </url>
 </urlset>

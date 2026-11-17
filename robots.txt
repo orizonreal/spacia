@@ -19,4 +19,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://spacia-one.vercel.app/sitemap.xml
+Sitemap: https://www.spacia-madhyamgram.in/sitemap.xml

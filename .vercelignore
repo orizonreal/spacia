@@ -1,0 +1,22 @@
+# Files kept in the repo but never deployed to the website.
+
+# Brochure, specifications, payment schedule, tower PDFs and the master plan are
+# shared only through the enquiry form (no direct downloads).
+/assets/documents
+/assets/new/*.pdf
+/assets/new/SPACIA-Master-Plan-27-June25.png
+
+# Raw source media that the page does not use (the site serves assets/video/*).
+/assets/new/*.mov
+/assets/new/spacia-reel.mp4
+/REEL-04.mp4
+/SPACIA - Last Block Reel
+/OOH Adapts
+/New Creatives + Revised Price
+/Old Creatives + Revised Price
+
+# Tooling and scratch files
+/tools
+/tmp-*
+/README.md
+/qa-screenshots

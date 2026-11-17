@@ -1,0 +1,14 @@
+{
+  "name": "Srijan Spacia Madhyamgram",
+  "short_name": "Spacia",
+  "description": "3 & 4 BHK flats by Srijan Realty on Jessore Road, Madhyamgram.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#870123",
+  "icons": [
+    { "src": "/assets/brand/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/assets/brand/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
