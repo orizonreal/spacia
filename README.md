@@ -1,7 +1,10 @@
 # Srijan Spacia landing page
 
 Static landing page for Srijan Spacia (SPACIA by Srijan Realty), Madhyamgram — live at https://www.spacia-madhyamgram.in.
-Stack: static HTML + Bootstrap 5.2 (CSS, modal JS) + vanilla JS, deployed on Vercel.
+Stack: static HTML + vanilla JS, deployed on Vercel. No third-party CSS/JS/fonts except Google Tag Manager.
+- Critical above-the-fold CSS is inlined in `<head>` (`<style id="critical-css">`); `userassets/css/style.css` loads non-blocking. If you change header/hero/form styles, update the inline block too.
+- `style.css` starts with a purged Bootstrap 5.2.3 subset (reboot, grid, modal) and the self-hosted font faces (`assets/fonts/`, latin + a one-glyph ₹ file per family).
+- Modals are handled by `site.js` (Bootstrap-compatible `data-bs-*` attributes).
 
 ## Settings — `userassets/js/site-config.js`
 `SITE_URL`, `PHONE`, `WHATSAPP_NUMBER`, `LEAD_ENDPOINT`, `GEO`, prices (`GTM_ID` is reference only).

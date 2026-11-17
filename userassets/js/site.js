@@ -302,41 +302,88 @@
     });
   });
 
+  /* ---------- Modals (replaces Bootstrap's modal JS) ----------
+   * Same markup/classes as Bootstrap 5 (.modal.fade -> .show, .modal-backdrop, body.modal-open)
+   * and the same data attributes: data-bs-toggle="modal" + data-bs-target, data-bs-dismiss="modal".
+   * Fires 'shown.bs.modal' / 'hidden.bs.modal' events. */
+  const FADE_MS = reduceMotion ? 0 : 300;
+  const focusableSel = 'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+  let openModal = null;
+  let backdrop = null;
+  const showModal = (el) => {
+    if (!el) return;
+    if (openModal && openModal !== el) hideModal(openModal, true);
+    openModal = el;
+    const scrollbar = window.innerWidth - document.documentElement.clientWidth;
+    document.body.classList.add('modal-open');
+    document.body.style.overflow = 'hidden';
+    if (scrollbar > 0) document.body.style.paddingRight = `${scrollbar}px`;
+    if (!backdrop) {
+      backdrop = document.createElement('div');
+      backdrop.className = 'modal-backdrop fade';
+      document.body.appendChild(backdrop);
+    }
+    el.style.display = 'block';
+    el.removeAttribute('aria-hidden');
+    el.setAttribute('aria-modal', 'true');
+    el.setAttribute('role', 'dialog');
+    void el.offsetWidth; // reflow so the fade/slide transition runs
+    backdrop.classList.add('show');
+    el.classList.add('show');
+    window.setTimeout(() => {
+      if (openModal !== el) return;
+      el.dispatchEvent(new Event('shown.bs.modal'));
+      if (!el.contains(document.activeElement)) (el.querySelector(focusableSel) || el).focus({ preventScroll: true });
+    }, FADE_MS);
+  };
+  const hideModal = (el, keepBackdrop = false) => {
+    if (!el || !el.classList.contains('show')) return;
+    el.classList.remove('show');
+    if (openModal === el) openModal = null;
+    const finish = () => {
+      el.style.display = 'none';
+      el.setAttribute('aria-hidden', 'true');
+      el.removeAttribute('aria-modal');
+      el.removeAttribute('role');
+      if (!openModal) {
+        backdrop?.remove(); backdrop = null;
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+      }
+      el.dispatchEvent(new Event('hidden.bs.modal'));
+    };
+    if (!keepBackdrop) backdrop?.classList.remove('show');
+    if (keepBackdrop || !FADE_MS) finish(); else window.setTimeout(finish, FADE_MS);
+  };
+  window.SPACIA_MODAL = { show: showModal, hide: hideModal };
+  document.addEventListener('click', (event) => {
+    const opener = event.target.closest('[data-bs-toggle="modal"]');
+    if (opener) {
+      event.preventDefault();
+      showModal(document.querySelector(opener.getAttribute('data-bs-target') || opener.getAttribute('href')));
+      return;
+    }
+    const closer = event.target.closest('[data-bs-dismiss="modal"]');
+    if (closer) { hideModal(closer.closest('.modal')); return; }
+    if (openModal && event.target === openModal) hideModal(openModal); // click on the backdrop area
+  });
+  document.addEventListener('keydown', (event) => {
+    if (!openModal) return;
+    if (event.key === 'Escape') { hideModal(openModal); return; }
+    if (event.key !== 'Tab') return;
+    const items = [...openModal.querySelectorAll(focusableSel)].filter((node) => node.offsetParent !== null);
+    if (!items.length) return;
+    const first = items[0], last = items[items.length - 1];
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  });
+
   /* ---------- Reusable enquiry modal ---------- */
   const modalEl = document.getElementById('enquiryModal');
   const modalForm = modalEl?.querySelector('form');
   let lastTrigger = null;
-  const modalApi = (() => {
-    if (!modalEl) return null;
-    if (window.bootstrap?.Modal) return window.bootstrap.Modal.getOrCreateInstance(modalEl);
-    // Fallback if the Bootstrap CDN is unavailable.
-    let backdrop;
-    return {
-      show() {
-        modalEl.style.display = 'block';
-        modalEl.classList.add('show');
-        modalEl.removeAttribute('aria-hidden');
-        modalEl.setAttribute('aria-modal', 'true');
-        document.body.classList.add('modal-open');
-        backdrop = document.createElement('div');
-        backdrop.className = 'modal-backdrop fade show';
-        document.body.appendChild(backdrop);
-        modalEl.dispatchEvent(new Event('shown.bs.modal'));
-      },
-      hide() {
-        modalEl.style.display = 'none';
-        modalEl.classList.remove('show');
-        modalEl.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('modal-open');
-        backdrop?.remove();
-        modalEl.dispatchEvent(new Event('hidden.bs.modal'));
-      }
-    };
-  })();
-  if (modalEl && !window.bootstrap?.Modal) {
-    modalEl.querySelectorAll('[data-bs-dismiss="modal"]').forEach((btn) => btn.addEventListener('click', () => modalApi.hide()));
-    modalEl.addEventListener('click', (event) => { if (event.target === modalEl) modalApi.hide(); });
-  }
+  const modalApi = modalEl ? { show: () => showModal(modalEl), hide: () => hideModal(modalEl) } : null;
 
   const openEnquiry = (trigger) => {
     if (!modalEl || !modalForm || !modalApi) return;
@@ -373,11 +420,22 @@
   /* ---------- Hero crossfade ---------- */
   const heroSlides = [...document.querySelectorAll('.sp-hero__slide')];
   if (heroSlides.length > 1) {
-    // Later slides carry their image details as data-img-* attributes; the <img> is created here
-    // (after page load) so the HTML never contains an <img> without a src.
+    // Later slides carry their image details as data-img-* attributes; the <picture>/<img> is
+    // created here so the HTML never contains an <img> without a src, and phones get the
+    // portrait crop (data-img-mobile-srcset) instead of the landscape render.
     const hydrate = () => heroSlides.forEach((slide) => {
       const d = slide.dataset;
       if (!d.imgSrc || slide.querySelector('img')) return;
+      const picture = document.createElement('picture');
+      if (d.imgMobileSrcset) {
+        const source = document.createElement('source');
+        source.media = '(max-width: 767px)';
+        source.srcset = d.imgMobileSrcset;
+        source.sizes = '100vw';
+        source.width = 750; // portrait crops are 750x1200 / 1080x1700
+        source.height = 1200;
+        picture.appendChild(source);
+      }
       const img = document.createElement('img');
       if (d.imgSrcset) img.srcset = d.imgSrcset;
       if (d.imgSizes) img.sizes = d.imgSizes;
@@ -386,7 +444,8 @@
       img.height = Number(d.imgHeight) || 720;
       img.decoding = 'async';
       img.src = d.imgSrc;
-      slide.appendChild(img);
+      picture.appendChild(img);
+      slide.appendChild(picture);
     });
     let index = 0;
     let timer = null;
@@ -398,10 +457,22 @@
       index = (index + 1) % heroSlides.length;
       heroSlides[index].classList.add('is-active');
     };
-    const start = () => { if (!timer && !reduceMotion) timer = window.setInterval(next, 6500); };
+    let begun = false;
+    const start = () => { if (begun && !timer && !reduceMotion) timer = window.setInterval(next, 6500); };
     const stop = () => { window.clearInterval(timer); timer = null; };
-    const begin = () => window.setTimeout(() => { hydrate(); start(); }, 1800);
-    if (document.readyState === 'complete') begin(); else window.addEventListener('load', begin, { once: true });
+    // The other slides are not needed for the first paint: fetch them on the visitor's first
+    // interaction (or 8 s after load), keeping the initial page load lean.
+    const begin = (event) => {
+      // A scroll event fired by scroll restoration on (re)load isn't an interaction.
+      if (begun || (event && event.type === 'scroll' && window.scrollY < 40)) return;
+      begun = true;
+      ['scroll', 'pointerdown', 'touchstart', 'keydown', 'mousemove'].forEach((type) => window.removeEventListener(type, begin));
+      hydrate();
+      start();
+    };
+    ['scroll', 'pointerdown', 'touchstart', 'keydown', 'mousemove'].forEach((type) => window.addEventListener(type, begin, { passive: true }));
+    const fallback = () => window.setTimeout(() => begin(), 8000);
+    if (document.readyState === 'complete') fallback(); else window.addEventListener('load', fallback, { once: true });
     document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
   }
 
@@ -505,6 +576,15 @@
   const video = frame?.querySelector('.reel-video');
   const playButton = frame?.querySelector('.reel-toggle');
   const soundButton = frame?.querySelector('.reel-sound');
+  if (video?.dataset.poster) {
+    const setPoster = () => { if (!video.poster) video.poster = video.dataset.poster; };
+    if ('IntersectionObserver' in window) {
+      const posterObserver = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) { setPoster(); posterObserver.disconnect(); }
+      }, { rootMargin: '600px 0px' });
+      posterObserver.observe(video);
+    } else setPoster();
+  }
   if (frame && video && playButton && soundButton) {
     const updatePlaybackUi = () => {
       const playing = !video.paused;
