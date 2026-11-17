@@ -42,7 +42,8 @@
   /* ---------- Tracking ----------
    * Google Tag Manager (GTM-WX5GS62L) is hard-coded in the <head> of index.html and 404.html,
    * so it is never injected here (no duplicate container). GA4 is configured inside GTM.
-   * The direct GA4 / Meta Pixel loaders run only if GTM_ID is empty and an ID is set. */
+   * Every event is pushed to window.dataLayer for GTM triggers. The direct GA4 / Meta Pixel
+   * loaders below run only if GTM_ID is empty and an ID is set (both are empty today). */
   window.dataLayer = window.dataLayer || [];
   const tracking = { ga4: false, pixel: false };
   const loadScript = (src) => {
@@ -70,12 +71,6 @@
       window.fbq('track', 'PageView');
       tracking.pixel = true;
     }
-  }
-  if (config.GSC_VERIFICATION && !document.querySelector('meta[name="google-site-verification"]')) {
-    const meta = document.createElement('meta');
-    meta.name = 'google-site-verification';
-    meta.content = config.GSC_VERIFICATION;
-    document.head.appendChild(meta);
   }
 
   const track = (eventName, params = {}) => {
@@ -117,7 +112,7 @@
   document.querySelectorAll('[data-wa-message]').forEach((link) => {
     link.href = whatsappUrl(link.dataset.waMessage || `Hi, I'm interested in ${PROJECT}.`);
     link.target = '_blank';
-    link.rel = 'noopener noreferrer';
+    link.rel = 'nofollow noopener noreferrer';
   });
   document.addEventListener('click', (event) => {
     const link = event.target.closest('a');
@@ -378,20 +373,27 @@
   /* ---------- Hero crossfade ---------- */
   const heroSlides = [...document.querySelectorAll('.sp-hero__slide')];
   if (heroSlides.length > 1) {
+    // Later slides carry their image details as data-img-* attributes; the <img> is created here
+    // (after page load) so the HTML never contains an <img> without a src.
     const hydrate = () => heroSlides.forEach((slide) => {
-      const img = slide.querySelector('img[data-src]');
-      if (!img) return;
-      if (img.dataset.srcset) img.srcset = img.dataset.srcset;
-      img.src = img.dataset.src;
-      img.removeAttribute('data-src');
-      img.removeAttribute('data-srcset');
+      const d = slide.dataset;
+      if (!d.imgSrc || slide.querySelector('img')) return;
+      const img = document.createElement('img');
+      if (d.imgSrcset) img.srcset = d.imgSrcset;
+      if (d.imgSizes) img.sizes = d.imgSizes;
+      img.alt = d.imgAlt || '';
+      img.width = Number(d.imgWidth) || 1440;
+      img.height = Number(d.imgHeight) || 720;
+      img.decoding = 'async';
+      img.src = d.imgSrc;
+      slide.appendChild(img);
     });
     let index = 0;
     let timer = null;
     const next = () => {
       const target = heroSlides[(index + 1) % heroSlides.length];
       const img = target.querySelector('img');
-      if (img && !img.complete) return; // wait until the next render has loaded
+      if (!img || !img.complete) return; // wait until the next render has loaded
       heroSlides[index].classList.remove('is-active');
       index = (index + 1) % heroSlides.length;
       heroSlides[index].classList.add('is-active');
@@ -413,7 +415,7 @@
 
   /* ---------- Gallery masonry + shared lightbox ---------- */
   const lightbox = document.getElementById('spacia-lightbox');
-  const lightboxImage = lightbox?.querySelector('img');
+  const lightboxFigure = lightbox?.querySelector('figure');
   const lightboxCaption = lightbox?.querySelector('figcaption');
   let lightboxReturn = null;
   const closeLightbox = () => {
@@ -421,13 +423,17 @@
     lightbox.classList.remove('is-open');
     lightbox.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('lightbox-open');
-    if (lightboxImage) lightboxImage.removeAttribute('src');
+    lightboxFigure?.querySelector('img')?.remove(); // never leave an <img> without a src in the DOM
     lightboxReturn?.focus();
   };
   const openLightbox = (src, alt, caption, trigger) => {
-    if (!lightbox || !lightboxImage) return;
+    if (!lightbox || !lightboxFigure) return;
+    lightboxFigure.querySelector('img')?.remove();
+    const lightboxImage = document.createElement('img');
+    lightboxImage.decoding = 'async';
     lightboxImage.src = src;
     lightboxImage.alt = alt || '';
+    lightboxFigure.insertBefore(lightboxImage, lightboxCaption);
     if (lightboxCaption) lightboxCaption.textContent = caption || alt || '';
     lightbox.classList.add('is-open');
     lightbox.setAttribute('aria-hidden', 'false');

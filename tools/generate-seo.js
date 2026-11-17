@@ -1,7 +1,7 @@
 // Run with `node tools/generate-seo.js` after changing userassets/js/site-config.js
-// (SITE_URL, prices, GSC_VERIFICATION, GEO) or the FAQ in index.html.
+// (SITE_URL, prices, GEO, socialImage) or the FAQ in index.html.
 // It keeps the static SEO output in sync: JSON-LD, canonical/OG URLs,
-// the Google Search Console meta tag, robots.txt and sitemap.xml.
+// robots.txt and sitemap.xml. (Search Console is verified with a root HTML file.)
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
@@ -37,13 +37,6 @@ html = html.replace(/(<span\b[^>]*data-spacia-config-price=["']([^"']+)["'][^>]*
   if (!price) throw new Error(`Missing configured price for ${configuration}`);
   return `${open}${price}${close}`;
 });
-
-// Google Search Console verification: output the tag only when a code is set.
-html = html.replace(/\s*<meta\s+name="google-site-verification"[^>]*>/i, '');
-if (config.GSC_VERIFICATION) {
-  const tag = `<meta name="google-site-verification" content="${String(config.GSC_VERIFICATION).replace(/"/g, '&quot;')}">`;
-  html = html.replace(/(<link\s+rel="canonical"[^>]*>)/i, `$1\n    ${tag}`);
-}
 
 // FAQ schema mirrors the visible FAQ exactly.
 const decodeHtml = (value) => value
@@ -175,4 +168,4 @@ ${sitemapImages.map((image) => `    <image:image>\n      <image:loc>${abs(image)
 </urlset>
 `);
 
-console.log(`SEO files synchronized for ${siteUrl}; ${questions.length} FAQ entries; GSC tag ${config.GSC_VERIFICATION ? 'written' : 'omitted (no code set)'}; geo ${project.geo ? 'included' : 'omitted (TODO)'}.`);
+console.log(`SEO files synchronized for ${siteUrl}; ${questions.length} FAQ entries; geo ${project.geo ? 'included' : 'omitted (TODO)'}.`);

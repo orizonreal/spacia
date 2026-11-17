@@ -20,8 +20,7 @@
   const GA4_ID = '';
   const META_PIXEL_ID = '';
 
-  // Google Search Console HTML-tag verification code (the content="..." value only).
-  const GSC_VERIFICATION = ''; // TODO
+  // Google Search Console is verified with the root file googleb66561e3103864b6.html.
 
   // Project coordinates for the ApartmentComplex schema. Not yet verified.
   // TODO: copy the exact pin from Google Maps (right-click the site > copy coordinates).
@@ -35,10 +34,9 @@
     GA4_ID,
     GTM_ID,
     META_PIXEL_ID,
-    GSC_VERIFICATION,
     GEO: Object.freeze(GEO),
     LAST_UPDATED: '2026-11-17',
-    socialImage: 'assets/images/spacia-social-1200x630.webp',
+    socialImage: 'assets/images/spacia-social-1200x630.jpg',
     startingConfiguration: '3 BHK + 2T',
     prices: Object.freeze({
       '3 BHK + 2T': '₹81.30 Lacs',
