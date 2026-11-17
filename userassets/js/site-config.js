@@ -13,11 +13,12 @@
   // TODO: add the CRM / Google Apps Script / webhook URL that should receive leads.
   const LEAD_ENDPOINT = '';
 
-  // Tracking loads only when an ID is set. GTM is preferred; when GTM_ID is set,
-  // configure GA4 and the Meta Pixel inside GTM and leave the next two empty.
-  const GTM_ID = ''; // TODO: e.g. 'GTM-XXXXXXX'
-  const GA4_ID = ''; // TODO: e.g. 'G-XXXXXXXXXX'
-  const META_PIXEL_ID = ''; // TODO: e.g. '123456789012345'
+  // Google Tag Manager is hard-coded in the <head> of index.html and 404.html; this value is
+  // for reference only (site.js never injects GTM). GA4 and the Meta Pixel are configured
+  // inside GTM, so keep the next two empty to avoid double counting.
+  const GTM_ID = 'GTM-WX5GS62L';
+  const GA4_ID = '';
+  const META_PIXEL_ID = '';
 
   // Google Search Console HTML-tag verification code (the content="..." value only).
   const GSC_VERIFICATION = ''; // TODO

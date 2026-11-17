@@ -39,20 +39,19 @@
     return stored;
   })();
 
-  /* ---------- Tracking: loads only when IDs are configured ---------- */
+  /* ---------- Tracking ----------
+   * Google Tag Manager (GTM-WX5GS62L) is hard-coded in the <head> of index.html and 404.html,
+   * so it is never injected here (no duplicate container). GA4 is configured inside GTM.
+   * The direct GA4 / Meta Pixel loaders run only if GTM_ID is empty and an ID is set. */
   window.dataLayer = window.dataLayer || [];
-  const tracking = { gtm: false, ga4: false, pixel: false };
+  const tracking = { ga4: false, pixel: false };
   const loadScript = (src) => {
     const script = document.createElement('script');
     script.async = true;
     script.src = src;
     document.head.appendChild(script);
   };
-  if (config.GTM_ID) {
-    window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
-    loadScript(`https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(config.GTM_ID)}`);
-    tracking.gtm = true;
-  } else {
+  if (!config.GTM_ID) {
     if (config.GA4_ID) {
       window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
       window.gtag('js', new Date());
@@ -83,7 +82,7 @@
     window.dataLayer.push({ event: eventName, ...params });
     if (tracking.ga4 && window.gtag) window.gtag('event', eventName, params);
     if (tracking.pixel && window.fbq) {
-      if (eventName === 'generate_lead') window.fbq('track', 'Lead', { content_name: params.requested_item || 'Enquiry' });
+      if (eventName === 'generate_lead') window.fbq('track', 'Lead', { content_name: params.request_item || 'Enquiry' });
       else if (eventName === 'click_whatsapp' || eventName === 'click_call') window.fbq('track', 'Contact', { method: eventName === 'click_call' ? 'phone' : 'whatsapp' });
       else window.fbq('trackCustom', eventName, params);
     }
@@ -173,10 +172,10 @@
     ATTRIBUTION_KEYS.forEach((key) => { lead[key] = attribution[key] || ''; });
     const whatsappHref = whatsappUrl(buildWhatsappMessage(lead));
     const trackLead = (via) => track('generate_lead', {
-      requested_item: lead.requested_item,
-      unit: lead.unit,
-      timeframe: lead.timeframe,
+      request_item: lead.requested_item,
+      unit_type: lead.unit,
       form_id: details.form_id || '',
+      timeframe: lead.timeframe,
       lead_channel: via
     });
 
@@ -196,8 +195,8 @@
       });
     }
 
+    trackLead('whatsapp'); // pushed before WhatsApp opens
     const opened = window.open(whatsappHref, '_blank', 'noopener,noreferrer');
-    trackLead('whatsapp');
     return Promise.resolve({ ok: true, via: 'whatsapp', whatsappHref, opened: Boolean(opened) });
   };
   window.submitLead = submitLead;
@@ -365,7 +364,7 @@
     }
     lastTrigger = trigger;
     modalApi.show();
-    track('open_enquiry_modal', { requested_item: item });
+    track('open_enquiry_modal', { request_item: item });
   };
   document.addEventListener('click', (event) => {
     const trigger = event.target.closest('[data-enquire]');
