@@ -417,6 +417,24 @@
   modalEl?.addEventListener('shown.bs.modal', () => modalForm?.elements.namedItem('name')?.focus());
   modalEl?.addEventListener('hidden.bs.modal', () => { if (lastTrigger && document.contains(lastTrigger)) lastTrigger.focus(); });
 
+  /* ---------- Tighter lazy loading for below-the-fold grids ----------
+   * Native loading="lazy" fetches anything within ~1250px of the viewport, which pulled the whole
+   * amenity grid into the first load on desktop. These images carry a 1x1 placeholder src and
+   * get their real src/srcset 300px before they scroll into view (<noscript> copy for no-JS). */
+  const lazyImages = [...document.querySelectorAll('img[data-lazy-src]')];
+  const reveal = (img) => {
+    if (img.dataset.lazySrcset) img.srcset = img.dataset.lazySrcset;
+    img.src = img.dataset.lazySrc;
+    img.removeAttribute('data-lazy-src');
+    img.removeAttribute('data-lazy-srcset');
+  };
+  if ('IntersectionObserver' in window) {
+    const lazyObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => { if (entry.isIntersecting) { reveal(entry.target); lazyObserver.unobserve(entry.target); } });
+    }, { rootMargin: '300px 0px' });
+    lazyImages.forEach((img) => lazyObserver.observe(img));
+  } else lazyImages.forEach(reveal);
+
   /* ---------- Hero crossfade ---------- */
   const heroSlides = [...document.querySelectorAll('.sp-hero__slide')];
   if (heroSlides.length > 1) {
