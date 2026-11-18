@@ -35,7 +35,7 @@
     GTM_ID,
     META_PIXEL_ID,
     GEO: Object.freeze(GEO),
-    LAST_UPDATED: '2026-11-17',
+    LAST_UPDATED: '2026-11-18',
     socialImage: 'assets/images/spacia-social-1200x630.jpg',
     startingConfiguration: '3 BHK + 2T',
     prices: Object.freeze({

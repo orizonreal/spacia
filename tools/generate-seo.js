@@ -107,8 +107,9 @@ const schema = {
       isPartOf: { '@id': id('website') },
       about: { '@id': id('project') },
       mainEntity: { '@id': id('project') },
-      primaryImageOfPage: { '@type': 'ImageObject', url: abs('assets/hero/aerial-dusk-1200.webp'), width: 1200, height: 600 },
+      primaryImageOfPage: { '@type': 'ImageObject', url: abs('assets/hero/pool-twilight-1440.webp'), width: 1440, height: 720 },
       breadcrumb: { '@id': id('breadcrumb') },
+      datePublished: '2026-11-06',
       dateModified: lastUpdated
     },
     {
@@ -120,7 +121,14 @@ const schema = {
       '@type': 'Organization',
       '@id': id('developer'),
       name: 'Srijan Realty',
-      url: 'https://www.srijanrealty.com/'
+      url: 'https://www.srijanrealty.com/',
+      logo: abs('assets/brand/srijan-realty-logo-240.png'),
+      sameAs: [
+        'https://www.facebook.com/srijanrealty.in/',
+        'https://www.instagram.com/srijanrealty/',
+        'https://www.youtube.com/user/srijanrealtygroup',
+        'https://www.linkedin.com/company/srijan-realty-ltd/'
+      ]
     },
     project,
     {

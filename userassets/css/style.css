@@ -7378,3 +7378,67 @@ footer.sp-footer { padding: 60px 0 0; border-top: 3px solid var(--sp-maroon); ba
   .sp-footer .sp-credit { font-size: .75rem; }
   .sp-credit img { width: 32px; }
 }
+
+/* =====================================================================
+   Final polish: touch-action, FAQ question headings, social row,
+   mobile tap targets (>=44px) and text (>=12px), no blur on mobile.
+   ===================================================================== */
+a, button, summary, label, select, input[type="checkbox"], input[type="radio"], [role="button"] { touch-action: manipulation; }
+
+/* FAQ questions are <h3> inside <summary>, styled exactly like the old summary text */
+.spacia-faq-list summary .spacia-faq-q { display: inline; margin: 0; padding: 0; font: inherit; color: inherit; letter-spacing: inherit; text-transform: none; }
+
+/* Timeline radios: the (invisible) input covers the whole 44px pill */
+.sp-chip input { inset: 0; z-index: 1; width: 100%; height: 100%; margin: 0; cursor: pointer; pointer-events: auto; }
+.sp-chip span { min-height: 44px; }
+
+/* "Follow Srijan Realty" */
+.sp-footer .sp-social__heading { margin: 20px 0 10px; }
+.sp-social { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.sp-footer .sp-social a {
+  display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid rgba(135, 1, 35, .3); border-radius: 50%;
+  color: var(--sp-maroon); text-decoration: none; transition: background-color .2s, color .2s, border-color .2s;
+}
+.sp-footer .sp-social a:hover, .sp-footer .sp-social a:focus-visible { background: var(--sp-maroon); border-color: var(--sp-maroon); color: #fff; text-decoration: none; }
+.sp-social .sp-icon { width: 20px; height: 20px; }
+
+/* No backdrop blur on phones or for reduced motion: cheaper taps and scrolling (INP) */
+@media (max-width: 767.98px), (prefers-reduced-motion: reduce) {
+  .sp-mobile-bar, .sp-price-box, .sp-hero__eyebrow, .sp-btn--ghost, .sp-visit__badge, .sp-header.is-scrolled { -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .sp-mobile-bar { background: #fff; }
+  .sp-header.is-scrolled { background: rgba(255, 255, 255, .98); }
+  .sp-price-box { background: rgba(20, 8, 12, .55); }
+  .sp-btn--ghost { background: rgba(20, 8, 12, .35); }
+  .sp-visit__badge { background: rgba(22, 6, 12, .8); }
+}
+
+@media (max-width: 767.98px) {
+  .sp-hero__slide.is-active img { animation: none; }
+  .sp-hero__eyebrow { background: rgba(20, 8, 12, .82); }
+
+  /* Text: nothing under 12px, form labels 13px */
+  .sp-hero__eyebrow, .sp-hero__note, .sp-price-box__label, .sp-stat__label, .sp-stats__note, .sp-eyebrow,
+  .sp-visit__badge, .sp-map-button__hint, .sp-contact__list small, .sp-footer .sp-footer__heading,
+  .sp-footer .sp-footer__disclaimer { font-size: 12px; }
+  .sp-stat__suffix { font-size: max(12px, .62em); }
+  .sp-field label, .sp-label, .sp-optional { font-size: 13px; }
+
+  /* Tap targets: at least 44px with 8px between neighbours */
+  .sp-check { grid-template-columns: 22px minmax(0, 1fr); align-items: start; min-height: 44px; }
+  .sp-check input { width: 22px; height: 22px; margin-top: 4px; }
+  .sp-check label { display: block; min-height: 44px; padding: 4px 0; }
+  .sp-check a, .sp-footer__meta a, .about-content p a { padding: 13px 0; margin: -13px 0; }
+  .sp-footer__links li { margin-bottom: 8px; }
+  .sp-footer__links a, .sp-footer__contact a, .sp-contact__list a, .sp-footer .sp-footer__meta a { display: inline-flex; align-items: center; min-height: 44px; margin: 0; padding: 0; }
+  .sp-footer__contact li { align-items: center; margin-bottom: 8px; }
+  .sp-footer__contact .sp-icon { margin-top: 0; }
+  .sp-link { min-height: 44px; }
+  .spacia-tabs, .sp-chips { gap: 8px; }
+  .spacia-tab { min-height: 44px; }
+  .spacia-config-table .button, .spacia-config-table tbody td[data-label="More details"] .button { display: inline-flex; align-items: center; min-height: 44px; }
+  .reel-sound { min-height: 44px; padding: 10px 14px; }
+  .sp-modal__close { width: 44px; height: 44px; }
+  .spacia-additional-amenities summary { padding-top: 12px; padding-bottom: 12px; }
+  .sp-thanks__again { min-height: 44px; display: flex; align-items: center; justify-content: center; }
+  .sp-header__brand { min-height: 44px; }
+}

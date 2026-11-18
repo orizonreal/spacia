@@ -73,7 +73,15 @@
     }
   }
 
+  // Interaction events are pushed in a deferred task so the tap's visual response (modal, link
+  // navigation) paints first (better INP). generate_lead stays synchronous: it must be pushed
+  // before WhatsApp opens, and window.open has to run inside the user's tap.
+  const defer = (fn) => (window.scheduler?.postTask ? window.scheduler.postTask(fn, { priority: 'background' }) : window.setTimeout(fn, 0));
   const track = (eventName, params = {}) => {
+    if (eventName !== 'generate_lead') { defer(() => pushEvent(eventName, params)); return; }
+    pushEvent(eventName, params);
+  };
+  const pushEvent = (eventName, params) => {
     window.dataLayer.push({ event: eventName, ...params });
     if (tracking.ga4 && window.gtag) window.gtag('event', eventName, params);
     if (tracking.pixel && window.fbq) {
