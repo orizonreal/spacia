@@ -47,6 +47,7 @@
     developerName: 'Srijan Realty',
     address: 'Jessore Road South, Mouza Doharia, Ward 09, beside Reliance Mall, Madhyamgram, Kolkata 700129',
     reraNumber: 'WBRERA/P/NOR/2025/003059',
+    channelPartnerReraNumber: 'WBRERA/A/SOU/2025/000652',
     reraCompletionDate: '31 December 2032',
     developerPossessionTarget: '2030'
   });

@@ -7239,6 +7239,7 @@ footer.sp-footer { padding: 60px 0 0; border-top: 3px solid var(--sp-maroon); ba
 .sp-footer__contact li { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; font-size: .9rem; line-height: 1.5; }
 .sp-footer__contact .sp-icon { width: 17px; height: 17px; margin-top: 3px; color: var(--sp-maroon); }
 .sp-footer__partner img { display: block; width: 140px; height: auto; margin-bottom: 12px; }
+.sp-footer__partner p { margin-bottom: 8px; }
 .sp-footer__bottom { padding: 22px 0; background: var(--sp-maroon); }
 .sp-footer .sp-footer__disclaimer { margin-bottom: 14px; color: rgba(255, 255, 255, .78); font-size: .74rem; line-height: 1.65; }
 .sp-footer__disclaimer strong { color: #fff; }
